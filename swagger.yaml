@@ -1,0 +1,108 @@
+swagger: '2.0'
+
+info:
+  title: 'Bucket storage service'
+  description: 'Stores objects organized in buckets.'
+  version: "#VERSION#"
+
+schemes:
+  - 'http'
+consumes:
+  - 'application/json'
+
+paths:
+  /objects/{bucket}/{objectID}:
+    put:
+      summary: "Upload object to the service."
+      operationId: "uploadObject"
+      consumes:
+      - "application/json"
+      parameters:
+      - in: path
+        name: bucket
+        required: true
+        description: "Unique ID of the bucket"
+        type: string
+      - in: path
+        name: objectID
+        required: true
+        description: "Unique ID of the object to store"
+        type: string
+      - in: body
+        name: "object"
+        schema:
+          $ref: "#/definitions/object"
+      responses:
+        201:
+          description: "Object created"
+          schema:
+            $ref: "#/definitions/objectId"
+        500:
+          description: "Failed to store object."
+
+    get:
+      summary: "Download an object from the service"
+      operationId: "getObject"
+      produces:
+      - "application/json"
+      parameters:
+      - in: path
+        name: bucket
+        required: true
+        description: "Unique ID of the bucket"
+        type: string
+      - in: path
+        name: objectID
+        required: true
+        description: "Unique ID of the object to store"
+        type: string
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/object"
+        404:
+          description: 'Object not found'
+        500:
+          description: "Failed to fetch object."
+
+    delete:
+      summary: "Deletes an object"
+      operationId: "deleteObject"
+      produces:
+      - "application/json"
+      parameters:
+      - in: path
+        name: bucket
+        required: true
+        description: "Unique ID of the bucket"
+        type: string
+      - in: path
+        name: objectID
+        required: true
+        description: "Unique ID of the object to store"
+        type: string
+      responses:
+        200:
+          description: "OK"
+        500:
+          description: "Failed to delete object."
+        404:
+          description: 'Object not found'
+
+definitions:
+  object:
+    type: object
+    description: "Object details"
+    properties:
+      content:
+        description: "Text content of the object"
+        type: string
+
+  objectId:
+    type: object
+    description: "Stored object id"
+    properties:
+      id:
+        description: "Stored object id"
+        type: string
