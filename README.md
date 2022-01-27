@@ -95,7 +95,7 @@ Stored object id
 
 # Run the service locally
 
-Before starting, you can define the storage mode in *"resources/config/.object-store-service.yaml*", by setting the variable **STORAGE_TYPE** to either **pgsql** (to use postgresql storage) or **memory** (to use memory storage). 
+Before starting, you can change the storage mode in *"resources/config/.object-store-service.yaml*", by setting the variable **STORAGE_TYPE** to either **pgsql** (to use postgresql storage) or **memory** (to use memory storage). 
 
 Currently the variable is set to **pgsql**.
 
