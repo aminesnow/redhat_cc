@@ -80,6 +80,7 @@ build.local: build.clean
 .PHONY: run.local run.infra run.infra.detach run.infra.stop run.upload.object run.read.object run.delete.object
 
 BODY=$(CURDIR)/resources/test/body.json
+PORT=8080
 
 #help run.infra: start docker-compose 
 run.infra:
@@ -99,15 +100,15 @@ run.local:
 
 #help run.upload.object: upload object data form resources/test/body.json
 run.upload.object:
-	curl -X PUT -i localhost:8080/objects/bucket00/42 -H 'Content-Type: application/json' -d "@$(BODY)"
+	curl -X PUT -i localhost:$(PORT)/objects/bucket00/42 -H 'Content-Type: application/json' -d "@$(BODY)"
 
 #help read.upload.object: read the object with id "42" in bucket "bucket00"
 run.read.object:
-	curl -X GET -i localhost:8080/objects/bucket00/42 -H 'Content-Type: application/json'
+	curl -X GET -i localhost:$(PORT)/objects/bucket00/42 -H 'Content-Type: application/json'
 
 #help run.delete.object: delete the object with id "42" from bucket "bucket00"
 run.delete.object:
-	curl -X DELETE -i localhost:8080/objects/bucket00/42 -H 'Content-Type: application/json'
+	curl -X DELETE -i localhost:$(PORT)/objects/bucket00/42 -H 'Content-Type: application/json'
 
 #####################
 # Test targets     #

@@ -151,7 +151,9 @@ Now that everything is running, you can test the service using the following obj
 }
 ```
 
-To start, you can run the following command upload the object:
+*Note: If you changed the service port, don't forget to override the **PORT** variable while running the commannds bellow.*
+
+To start, you can run the following command to upload the object:
 
     make run.upload.object
 
@@ -159,6 +161,6 @@ Then to read the object content, you can use:
 
     make run.read.object
 
-And finally, to delete the object with this command:
+And finally, you can delete the object with this command:
 
     make run.delete.object
