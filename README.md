@@ -97,18 +97,24 @@ Stored object id
 
 # Run the service locally
 
+Before starting, you can define the storage mode in *"resources/config/.object-store-service.yaml*", by setting the variable **STORAGE_TYPE** to either **pgsql** (to use postgresql storage) or **memory** (to use memory storage). 
+
+Currently the variable is set to **pgsql**.
+
   **1. Load tools**
 
 Start by executing the following command to get the necessary tools:
     
     make tools
 
-  **2. Run docker compose**
+  **2. Run docker compose (Optional)**
 
 Next, run this command to get PostgreSQL and PgAdmin up and running:
 
     make run.infra.detach
-    
+
+*Note: This is not necessary if you're running the service in memory mode*
+
   **3. Generate PostgreSQL golang models (Optional)**
 
 Once everything is up and running, run this command to generate the golang database models:
