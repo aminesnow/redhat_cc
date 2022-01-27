@@ -13,7 +13,7 @@ consumes:
 paths:
   /objects/{bucket}/{objectID}:
     put:
-      summary: "Upload object to the service."
+      summary: "Upload an object or replace it's content if it exists."
       operationId: "uploadObject"
       consumes:
       - "application/json"
@@ -33,10 +33,6 @@ paths:
         schema:
           $ref: "#/definitions/object"
       responses:
-        200:
-          description: "Object updated"
-          schema:
-            $ref: "#/definitions/objectId"
         201:
           description: "Object created"
           schema:
@@ -45,7 +41,7 @@ paths:
           description: "Failed to store object."
 
     get:
-      summary: "Download an object from the service"
+      summary: "Download an object."
       operationId: "getObject"
       produces:
       - "application/json"
@@ -71,7 +67,7 @@ paths:
           description: "Failed to fetch object."
 
     delete:
-      summary: "Deletes an object"
+      summary: "Deletes an object."
       operationId: "deleteObject"
       produces:
       - "application/json"

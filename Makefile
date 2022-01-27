@@ -3,7 +3,7 @@ VERSION=$(shell cat VERSION)
 
 .PHONY: help
 
-#help help target
+#help help: help target
 help:
 	@fgrep -h "#help" $(MAKEFILE_LIST) | fgrep -v fgrep | sed -e 's/\\$$//' | sed -e 's/#help//'
 
@@ -29,9 +29,9 @@ tools: tools.clean tools.get
 ############################
 # Model generation targets #
 ############################
-.PHONY: generate.models
+.PHONY: generate.models generate.repo.mocks
 
-#help db.generate.models: generate models for the database
+#help generate.models: generate models for the database
 generate.models:
 	$(TOOLS_DIR)/gen --sqltype=postgres \
 	--gorm --no-json --no-xml --overwrite --mapping postgresql/mapping.json --out postgresql/ \
@@ -101,9 +101,11 @@ run.local:
 run.upload.object:
 	curl -X PUT -i localhost:8080/objects/bucket00/42 -H 'Content-Type: application/json' -d "@$(BODY)"
 
+#help read.upload.object: read the object with id "42" in bucket "bucket00"
 run.read.object:
 	curl -X GET -i localhost:8080/objects/bucket00/42 -H 'Content-Type: application/json'
 
+#help run.delete.object: delete the object with id "42" from bucket "bucket00"
 run.delete.object:
 	curl -X DELETE -i localhost:8080/objects/bucket00/42 -H 'Content-Type: application/json'
 

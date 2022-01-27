@@ -31,7 +31,7 @@ func NewUploadObject(ctx *middleware.Context, handler UploadObjectHandler) *Uplo
 
 /* UploadObject swagger:route PUT /objects/{bucket}/{objectID} uploadObject
 
-Upload object to the service.
+Upload an object or replace it's content if it exists.
 
 */
 type UploadObject struct {

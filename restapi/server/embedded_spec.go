@@ -36,7 +36,7 @@ func init() {
         "produces": [
           "application/json"
         ],
-        "summary": "Download an object from the service",
+        "summary": "Download an object.",
         "operationId": "getObject",
         "parameters": [
           {
@@ -73,7 +73,7 @@ func init() {
         "consumes": [
           "application/json"
         ],
-        "summary": "Upload object to the service.",
+        "summary": "Upload an object or replace it's content if it exists.",
         "operationId": "uploadObject",
         "parameters": [
           {
@@ -114,7 +114,7 @@ func init() {
         "produces": [
           "application/json"
         ],
-        "summary": "Deletes an object",
+        "summary": "Deletes an object.",
         "operationId": "deleteObject",
         "parameters": [
           {
@@ -188,7 +188,7 @@ func init() {
         "produces": [
           "application/json"
         ],
-        "summary": "Download an object from the service",
+        "summary": "Download an object.",
         "operationId": "getObject",
         "parameters": [
           {
@@ -225,7 +225,7 @@ func init() {
         "consumes": [
           "application/json"
         ],
-        "summary": "Upload object to the service.",
+        "summary": "Upload an object or replace it's content if it exists.",
         "operationId": "uploadObject",
         "parameters": [
           {
@@ -266,7 +266,7 @@ func init() {
         "produces": [
           "application/json"
         ],
-        "summary": "Deletes an object",
+        "summary": "Deletes an object.",
         "operationId": "deleteObject",
         "parameters": [
           {

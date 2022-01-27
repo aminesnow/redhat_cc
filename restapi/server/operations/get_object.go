@@ -31,7 +31,7 @@ func NewGetObject(ctx *middleware.Context, handler GetObjectHandler) *GetObject 
 
 /* GetObject swagger:route GET /objects/{bucket}/{objectID} getObject
 
-Download an object from the service
+Download an object.
 
 */
 type GetObject struct {

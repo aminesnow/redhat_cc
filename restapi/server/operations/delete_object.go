@@ -31,7 +31,7 @@ func NewDeleteObject(ctx *middleware.Context, handler DeleteObjectHandler) *Dele
 
 /* DeleteObject swagger:route DELETE /objects/{bucket}/{objectID} deleteObject
 
-Deletes an object
+Deletes an object.
 
 */
 type DeleteObject struct {
