@@ -97,7 +97,7 @@ Stored object id
 
 Before starting, you can change the storage mode in *"resources/config/.object-store-service.yaml*", by setting the variable **STORAGE_TYPE** to either **pgsql** (to use postgresql storage) or **memory** (to use memory storage). 
 
-Currently the variable is set to **pgsql**.
+You can also change the service port by changing the variable **SERVICE_PORT**.
 
   **1. Load tools**
 
