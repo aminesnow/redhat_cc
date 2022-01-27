@@ -48,7 +48,7 @@ func init() {
           },
           {
             "type": "string",
-            "description": "Unique ID of the object to store",
+            "description": "ID of the object to store",
             "name": "objectID",
             "in": "path",
             "required": true
@@ -85,7 +85,7 @@ func init() {
           },
           {
             "type": "string",
-            "description": "Unique ID of the object to store",
+            "description": "ID of the object to store",
             "name": "objectID",
             "in": "path",
             "required": true
@@ -126,7 +126,7 @@ func init() {
           },
           {
             "type": "string",
-            "description": "Unique ID of the object to store",
+            "description": "ID of the object to store",
             "name": "objectID",
             "in": "path",
             "required": true
@@ -200,7 +200,7 @@ func init() {
           },
           {
             "type": "string",
-            "description": "Unique ID of the object to store",
+            "description": "ID of the object to store",
             "name": "objectID",
             "in": "path",
             "required": true
@@ -237,7 +237,7 @@ func init() {
           },
           {
             "type": "string",
-            "description": "Unique ID of the object to store",
+            "description": "ID of the object to store",
             "name": "objectID",
             "in": "path",
             "required": true
@@ -278,7 +278,7 @@ func init() {
           },
           {
             "type": "string",
-            "description": "Unique ID of the object to store",
+            "description": "ID of the object to store",
             "name": "objectID",
             "in": "path",
             "required": true

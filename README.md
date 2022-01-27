@@ -22,7 +22,7 @@ This service provides a RESTful API to store, fetch and delete objects origanize
 | Name | Located in | Description | Required | Schema |
 | ---- | ---------- | ----------- | -------- | ---- |
 | bucket | path | Unique ID of the bucket | Yes | string |
-| objectID | path | Unique ID of the object to store | Yes | string |
+| objectID | path | ID of the object to store | Yes | string |
 | object | body |  | No | [object](#object) |
 
 ##### Responses
@@ -42,7 +42,7 @@ This service provides a RESTful API to store, fetch and delete objects origanize
 | Name | Located in | Description | Required | Schema |
 | ---- | ---------- | ----------- | -------- | ---- |
 | bucket | path | Unique ID of the bucket | Yes | string |
-| objectID | path | Unique ID of the object to store | Yes | string |
+| objectID | path | ID of the object to store | Yes | string |
 
 ##### Responses
 
@@ -62,7 +62,7 @@ This service provides a RESTful API to store, fetch and delete objects origanize
 | Name | Located in | Description | Required | Schema |
 | ---- | ---------- | ----------- | -------- | ---- |
 | bucket | path | Unique ID of the bucket | Yes | string |
-| objectID | path | Unique ID of the object to store | Yes | string |
+| objectID | path | ID of the object to store | Yes | string |
 
 ##### Responses
 
@@ -109,17 +109,19 @@ Start by executing the following command to get the necessary tools:
 
 Next, run this command to get PostgreSQL and PgAdmin up and running:
 
+*Note: This is not necessary if you're running the service in memory mode*
+
     make run.infra.detach
 
-*Note: This is not necessary if you're running the service in memory mode*
 
   **3. Generate PostgreSQL golang models (Optional)**
 
 Once everything is up and running, run this command to generate the golang database models:
 
+*Note: This is only necessary if you change the sql models*
+
     make generate.models
 
-*Note: This is only necessary if you change the sql models*
 
 <br/>
 

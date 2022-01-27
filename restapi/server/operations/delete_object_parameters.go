@@ -35,7 +35,7 @@ type DeleteObjectParams struct {
 	  In: path
 	*/
 	Bucket string
-	/*Unique ID of the object to store
+	/*ID of the object to store
 	  Required: true
 	  In: path
 	*/

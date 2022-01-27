@@ -26,7 +26,7 @@ paths:
       - in: path
         name: objectID
         required: true
-        description: "Unique ID of the object to store"
+        description: "ID of the object to store"
         type: string
       - in: body
         name: "object"
@@ -54,7 +54,7 @@ paths:
       - in: path
         name: objectID
         required: true
-        description: "Unique ID of the object to store"
+        description: "ID of the object to store"
         type: string
       responses:
         200:
@@ -80,7 +80,7 @@ paths:
       - in: path
         name: objectID
         required: true
-        description: "Unique ID of the object to store"
+        description: "ID of the object to store"
         type: string
       responses:
         200:
