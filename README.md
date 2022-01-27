@@ -7,7 +7,6 @@ This service provides a RESTful API to store, fetch and delete objects origanize
 3. [Try it out](#try-it-out)
 
 <br/>
-<br/>
 
 # API definition
 ## **Routes**
@@ -93,7 +92,6 @@ Stored object id
 | id | string | Stored object id | No | 
 
 <br/>
-<br/>
 
 # Run the service locally
 
@@ -138,7 +136,6 @@ Now that everything is set, run the following command to launch the service:
 
     make run.local
 
-<br/>
 <br/>
 
 # Try it out
