@@ -13,9 +13,9 @@ const (
 	servicePort = "SERVICE_PORT"
 
 	// storage type.
-	// possible values: psql, memory
+	// possible values: pgsql, memory
 	storageType         = "STORAGE_TYPE"
-	STORAGE_TYPE_PSQL   = "psql"
+	STORAGE_TYPE_PGSQL  = "pgsql"
 	STORAGE_TYPE_MEMORY = "memory"
 
 	// postgresql params
@@ -75,7 +75,7 @@ func GetStorageType() string {
 	st := viper.GetString(storageType)
 
 	switch st {
-	case STORAGE_TYPE_PSQL:
+	case STORAGE_TYPE_PGSQL:
 		return st
 	case STORAGE_TYPE_MEMORY:
 		return st

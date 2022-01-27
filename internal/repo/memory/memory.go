@@ -27,13 +27,13 @@ func NewMemoryObjectRepo() *MemoryObjectRepo {
 	}
 }
 
-func (mo *MemoryObjectRepo) ReadObject(bucket string, objectID string) (*entity.Object, error) {
+func (mo *MemoryObjectRepo) ReadObject(bucketID string, objectID string) (*entity.Object, error) {
 	mo.lock.RLock()
 	defer mo.lock.RUnlock()
 
 	logrus.Debug(mo.store)
 
-	if bStore, okB := mo.store[bucket]; okB {
+	if bStore, okB := mo.store[bucketID]; okB {
 		if obj, okO := bStore[objectID]; okO {
 			return &entity.Object{
 				ObjectID: obj.ID,
@@ -44,10 +44,10 @@ func (mo *MemoryObjectRepo) ReadObject(bucket string, objectID string) (*entity.
 		return nil, common.NewErrNotFoundError("object", objectID)
 	}
 
-	return nil, common.NewErrNotFoundError("bucket", bucket)
+	return nil, common.NewErrNotFoundError("bucket", bucketID)
 }
 
-func (mo *MemoryObjectRepo) WriteObject(bucket string, object entity.Object) error {
+func (mo *MemoryObjectRepo) WriteObject(bucketID string, object entity.Object) error {
 	mo.lock.Lock()
 	defer mo.lock.Unlock()
 
@@ -57,20 +57,20 @@ func (mo *MemoryObjectRepo) WriteObject(bucket string, object entity.Object) err
 	}
 
 	// create bucket if it doesn't exist
-	if mo.store[bucket] == nil {
-		mo.store[bucket] = make(map[string]sotredObject)
+	if mo.store[bucketID] == nil {
+		mo.store[bucketID] = make(map[string]sotredObject)
 	}
 
-	mo.store[bucket][sObj.ID] = sObj
+	mo.store[bucketID][sObj.ID] = sObj
 
 	return nil
 }
 
-func (mo *MemoryObjectRepo) DeleteObject(bucket string, objectID string) error {
+func (mo *MemoryObjectRepo) DeleteObject(bucketID string, objectID string) error {
 	mo.lock.Lock()
 	defer mo.lock.Unlock()
 
-	if bStore, okB := mo.store[bucket]; okB {
+	if bStore, okB := mo.store[bucketID]; okB {
 		if _, okO := bStore[objectID]; okO {
 			delete(bStore, objectID)
 			return nil
@@ -79,5 +79,5 @@ func (mo *MemoryObjectRepo) DeleteObject(bucket string, objectID string) error {
 		return common.NewErrNotFoundError("object", objectID)
 	}
 
-	return common.NewErrNotFoundError("bucket", bucket)
+	return common.NewErrNotFoundError("bucket", bucketID)
 }

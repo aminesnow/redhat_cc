@@ -5,7 +5,7 @@ import (
 )
 
 type ObjectStore interface {
-	ReadObject(bucket string, objectID string) (*entity.Object, error)
-	WriteObject(bucket string, object entity.Object) error
-	DeleteObject(bucket string, objectID string) error
+	ReadObject(bucketID string, objectID string) (*entity.Object, error)
+	WriteObject(bucketID string, object entity.Object) error
+	DeleteObject(bucketID string, objectID string) error
 }

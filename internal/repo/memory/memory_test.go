@@ -41,16 +41,18 @@ func TestWriteObject_Nominal(t *testing.T) {
 	assert.True(ok)
 }
 
-func TestWriteObject_BucketNotFound(t *testing.T) {
+func TestWriteObject_NotFound(t *testing.T) {
 	assert := assert.New(t)
 	store := memory.NewMemoryObjectRepo()
 
+	// try to read inexistant object
 	sObj, err := store.ReadObject("bucket", "42")
 	assert.Nil(sObj)
 	assert.NotNil(err)
 	_, ok := err.(common.ErrNotFoundError)
 	assert.True(ok)
 
+	// try to delete inexistant object
 	err = store.DeleteObject("bucket", "42")
 	assert.NotNil(err)
 	_, ok = err.(common.ErrNotFoundError)

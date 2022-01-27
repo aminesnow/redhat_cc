@@ -24,3 +24,7 @@ func NewErrInternalErrorMsg(msg string, args ...interface{}) ErrInternalError {
 func NewErrNotFoundError(name string, id string) ErrNotFoundError {
 	return ErrNotFoundError{errors.Errorf("entity %s:%s was not found", name, id)}
 }
+
+func NewErrNotFoundErrorMsg(msg string, args ...interface{}) ErrNotFoundError {
+	return ErrNotFoundError{errors.Errorf(msg, args...)}
+}

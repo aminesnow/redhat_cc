@@ -1,6 +1,8 @@
 NAME=object-store-service
 VERSION=$(shell cat VERSION)
 
+.PHONY: help
+
 #help help target
 help:
 	@fgrep -h "#help" $(MAKEFILE_LIST) | fgrep -v fgrep | sed -e 's/\\$$//' | sed -e 's/#help//'
@@ -33,13 +35,16 @@ tools: tools.clean tools.get
 generate.models:
 	$(TOOLS_DIR)/gen --sqltype=postgres \
 	--gorm --no-json --no-xml --overwrite --mapping postgresql/mapping.json --out postgresql/ \
-	--connstr "postgresql://object_store_admin:azerty@localhost:5432/object_store?sslmode=disable" --model=models --database object_store
+	--connstr "postgresql://bucket_store_admin:azerty@localhost:5432/bucket_store?sslmode=disable" --model=models --database bucket_store
 
+#help generate.mocks: Generate/update mocks for testing
+generate.repo.mocks:
+	$(TOOLS_DIR)/mockgen -source=$(CURDIR)/internal/repo/interfaces.go -destination=$(CURDIR)/internal/repo/mock/repo.go
 
 #####################
 # Build targets     #
 #####################
-.PHONY: build.clean build.vendor build.vendor.full build.swagger build.local
+.PHONY: build.clean build.vendor build.vendor.full build.swagger build.local build.mocks
 
 TOOLS_DIR=$(CURDIR)/tools/bin
 
@@ -64,10 +69,6 @@ build.swagger: build.clean
 	sed "s/#VERSION#/$(VERSION)/g" -i $(CURDIR)/target/swagger.yaml
 	$(TOOLS_DIR)/swagger generate server -f $(CURDIR)/target/swagger.yaml --name=$(NAME) -m restapi/models -s restapi/server --exclude-main --regenerate-configureapi
 
-#help build.mock: Generate/update mocks for testing
-build.mocks:
-	$(TOOLS_DIR)/mockgen -source=$(CURDIR)/internal/repo/interfaces.go -destination=$(CURDIR)/internal/repo/mock/repo.go
-
 #help build.local: build locally a binary, in target/ folder
 build.local: build.clean
 	go build -mod=vendor $(BUILD_ARGS) -o $(CURDIR)/target/run $(CURDIR)/cli/main.go
@@ -76,9 +77,21 @@ build.local: build.clean
 #####################
 # Run targets     #
 #####################
-.PHONY: run.local
+.PHONY: run.local run.infra run.infra.detach run.infra.stop run.upload.object run.read.object run.delete.object
 
 BODY=$(CURDIR)/resources/test/body.json
+
+#help run.infra: start docker-compose 
+run.infra:
+	docker-compose -f $(CURDIR)/docker-compose.yaml up
+
+#help run.infra.detach: start docker-compose on detached mode
+run.infra.detach:
+	docker-compose -f $(CURDIR)/docker-compose.yaml up -d
+
+#help run.infra.stop: stop docker-compose
+run.infra.stop:
+	docker-compose -f $(CURDIR)/docker-compose.yaml down
 
 #help run.local: run the application locally
 run.local:

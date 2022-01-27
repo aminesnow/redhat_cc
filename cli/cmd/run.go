@@ -39,7 +39,7 @@ var runCmd = &cobra.Command{
 		switch st {
 		case conf.STORAGE_TYPE_MEMORY:
 			repo = memory.NewMemoryObjectRepo()
-		case conf.STORAGE_TYPE_PSQL:
+		case conf.STORAGE_TYPE_PGSQL:
 			psqlConf := conf.GetPsqlParams()
 			dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%d sslmode=disable",
 				psqlConf.Host, psqlConf.User, psqlConf.Pwd, psqlConf.DBName, psqlConf.Port)
@@ -48,7 +48,6 @@ var runCmd = &cobra.Command{
 				logrus.WithError(err).Error("failed to connect to postgresql")
 				return err
 			}
-
 			repo = postgres.NewPostgresqlRepo(db)
 		default:
 			repo = memory.NewMemoryObjectRepo()
@@ -60,11 +59,8 @@ var runCmd = &cobra.Command{
 
 		setup.SetHandlers(api, uc)
 
-		//api.ServerShutdown = apiServerShutDown(*producer)
-
 		serverParams := conf.GetServiceParams()
 		server := server.NewServer(api)
-
 		server.Port = serverParams.Port
 		server.Host = serverParams.Host
 
@@ -83,10 +79,3 @@ var runCmd = &cobra.Command{
 func init() {
 	rootCmd.AddCommand(runCmd)
 }
-
-/*
-func apiServerShutDown() func() {
-	return func() {
-		// TODO
-	}
-}*/

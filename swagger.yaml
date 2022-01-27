@@ -33,6 +33,10 @@ paths:
         schema:
           $ref: "#/definitions/object"
       responses:
+        200:
+          description: "Object updated"
+          schema:
+            $ref: "#/definitions/objectId"
         201:
           description: "Object created"
           schema:

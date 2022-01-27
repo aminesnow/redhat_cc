@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+  postgres:
+    image: 'postgres:latest'
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=123
+      - BUCKET_STORE_DB=bucket_store
+      - BUCKET_STORE_ADMIN_USR=bucket_store_admin
+      - BUCKET_STORE_ADMIN_PWD=azerty
+    volumes:
+    - ${PWD}/postgresql/init.sh:/docker-entrypoint-initdb.d/init.sh
+    - ${PWD}/postgresql/sql/:/sql/
+  
+  pgadmin:
+    image: dpage/pgadmin4:4.23
+    environment:
+        PGADMIN_DEFAULT_EMAIL: admin@pgadmin.com
+        PGADMIN_DEFAULT_PASSWORD: password
+        PGADMIN_LISTEN_PORT: 80
+    ports:
+        - 15432:80
+    volumes:
+        - pgadmin:/var/lib/pgadmin
+    depends_on:
+        - postgres
+
+volumes:
+    pgadmin:
