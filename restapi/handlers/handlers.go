@@ -23,7 +23,7 @@ func UploadObjectHandler(uc usecases.ManageObjects) func(params operations.Uploa
 		if err != nil {
 			logrus.Error(err.Error())
 
-			return operations.NewDeleteObjectInternalServerError()
+			return operations.NewUploadObjectInternalServerError()
 		}
 
 		return operations.NewUploadObjectCreated().WithPayload(&models.ObjectID{ID: params.ObjectID})
@@ -43,9 +43,9 @@ func GetObjectHandler(uc usecases.ManageObjects) func(params operations.GetObjec
 			case common.ErrNotFoundError:
 				return operations.NewGetObjectNotFound()
 			case common.ErrInternalError:
-				return operations.NewDeleteObjectInternalServerError()
+				return operations.NewGetObjectInternalServerError()
 			default:
-				return operations.NewDeleteObjectInternalServerError()
+				return operations.NewGetObjectInternalServerError()
 			}
 		}
 
@@ -63,7 +63,7 @@ func DeleteObjectHandler(uc usecases.ManageObjects) func(params operations.Delet
 
 			switch err.(type) {
 			case common.ErrNotFoundError:
-				return operations.NewGetObjectNotFound()
+				return operations.NewDeleteObjectNotFound()
 			case common.ErrInternalError:
 				return operations.NewDeleteObjectInternalServerError()
 			default:
