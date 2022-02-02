@@ -127,7 +127,7 @@ Once everything is up and running, run this command to generate the golang datab
 
   **4. Get dependencies and build**
 
-Next, get all dependencies both needed and build the service executable using the following commands:
+Next, get all dependencies needed and build the service executable using the following commands:
 
     make build.vendor
     make build.local
